@@ -7,7 +7,7 @@
   (vec (for [row (range 0 size)]
          (vec (for [col (range 0 size)]
                 {:row     row, :col col, :visited? false
-                 :bottom? true, :right? true})))))
+                 :bottom? true, :right? true :start? false})))))
 
 (defn possible-neighbors [rooms row col]
  [(get-in rooms [(- row 1) col])
@@ -55,6 +55,7 @@
 (defn -main [& args]
   (let [rooms (create-rooms)
         rooms (create-maze rooms 0 0 )]
+    (assoc-in rooms[0 0 :start?] true)
     ;print top walls
     (doseq [row rooms]
       (print " _"))
